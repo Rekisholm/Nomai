@@ -1,0 +1,85 @@
+services:
+  postgresql:
+    image: postgres:13.12
+    container_name: cve-postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: dolphinscheduler
+    volumes:
+      - ./pgdata/postgresql:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "root"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+    networks:
+      - ds-net
+
+  zookeeper:
+    image: zookeeper:3.8
+    container_name: cve-zookeeper
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888;2181
+    healthcheck:
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ds-net
+
+  dolphinscheduler-tools:
+    image: apache/dolphinscheduler-tools:3.1.8
+    container_name: cve-tools
+    environment:
+      TZ: Asia/Shanghai
+      DATABASE: postgresql
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/dolphinscheduler
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      zookeeper:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "/opt/dolphinscheduler/tools/bin/upgrade-schema.sh"]
+    networks:
+      - ds-net
+
+  dolphinscheduler:
+    image: apache/dolphinscheduler-standalone-server:3.1.8
+    container_name: cve-dolphinscheduler
+    environment:
+      TZ: Asia/Shanghai
+      DATABASE: postgresql
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/dolphinscheduler
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      REGISTRY_ZOOKEEPER_CONNECT_STRING: zookeeper:2181
+    ports:
+      - "12345:12345"
+    depends_on:
+      dolphinscheduler-tools:
+        condition: service_completed_successfully
+    networks:
+      - ds-net
+
+networks:
+  ds-net:
+    driver: bridge

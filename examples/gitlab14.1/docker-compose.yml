@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: pg-request-logger:13.12
+    container_name: gitlab-pg
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: gitlab
+      POSTGRES_PASSWORD: Gitlab@123456
+      POSTGRES_DB: gitlabhq_production
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+
+  gitlab:
+    image: gitlab/gitlab-ce:14.1.0-ce.0
+    container_name: gitlab-ce14
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8080:80"
+    environment:
+      HP_REQUEST_ID_HOOK: "${HP_REQUEST_ID_HOOK:-1}"
+      HP_PG_HOOK: "${HP_PG_HOOK:-1}"
+      HP_SQL_REWRITE: "${HP_SQL_REWRITE:-1}"
+      HP_READ_LOG: "${HP_READ_LOG:-1}"
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['db_adapter']='postgresql'
+        gitlab_rails['db_host']='postgres'
+        gitlab_rails['db_port']=5432
+        gitlab_rails['db_database']='gitlabhq_production'
+        gitlab_rails['db_username']='gitlab'
+        gitlab_rails['db_password']='Gitlab@123456'
+        gitlab_rails['env'] = {
+          'HP_REQUEST_ID_HOOK' => ENV.fetch('HP_REQUEST_ID_HOOK', '1'),
+          'HP_PG_HOOK' => ENV.fetch('HP_PG_HOOK', '1'),
+          'HP_SQL_REWRITE' => ENV.fetch('HP_SQL_REWRITE', '1'),
+          'HP_READ_LOG' => ENV.fetch('HP_READ_LOG', '1')
+        }
+        postgresql['enable']=false
+    volumes:
+      - ./gitlabdata/config:/etc/gitlab
+      - ./gitlabdata/logs:/var/log/gitlab
+      - ./gitlabdata/data:/var/opt/gitlab
+      
+      - ./hook/hook.rb:/opt/gitlab/embedded/service/gitlab-rails/config/initializers/hook.rb
+      - ./hook/hook_pg.rb:/opt/gitlab/embedded/service/gitlab-rails/config/initializers/hook_pg.rb
+      - ./hook/table_config.json:/tmp/table_config.json
+      - ./logs:/tmp/logs
+      - ../../rust_sqlparse_compatible/librust_sql_rewriter.so:/tmp/librust_sql_rewriter.so

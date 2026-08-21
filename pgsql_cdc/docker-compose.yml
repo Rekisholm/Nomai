@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: pg-request-logger:13.12
+    container_name: pgcdc
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pgcdc
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"

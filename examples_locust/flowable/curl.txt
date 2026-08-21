@@ -1,0 +1,193 @@
+Get home page
+curl 'http://10.0.0.252:8080/flowable-ui/idm/views/login.html' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/idm/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Login
+curl 'http://10.0.0.252:8080/flowable-ui/app/authentication' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/idm/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --data-raw 'j_username=admin&j_password=test&_spring_security_remember_me=true&submit=Login' \
+  --insecure
+
+Get task
+curl 'http://10.0.0.252:8080/flowable-ui/workflow/views/tasks.html' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/workflow/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+
+
+Create task
+curl 'http://10.0.0.252:8080/flowable-ui/app/rest/tasks' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/workflow/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --data-raw '{"name":"New task 3","description":"123"}' \
+  --insecure
+
+Mark task complete
+curl 'http://10.0.0.252:8080/flowable-ui/app/rest/tasks/ae4f0b3e-0495-11f1-9aad-5a4d46a20f21/action/complete' \
+  -X 'PUT' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 0' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/workflow/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Get account
+curl 'http://10.0.0.252:8080/flowable-ui/idm-app/rest/account' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/idm/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Create user
+curl 'http://10.0.0.252:8080/flowable-ui/idm-app/rest/admin/users' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/idm/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --data-raw '{"id":"3","email":"rekisholm@gmail.com","firstName":"JingRun","lastName":"Zhang","password":"runrun123"}' \
+  --insecure
+
+Get user list
+curl 'http://10.0.0.252:8080/flowable-ui/idm-app/rest/admin/users?sort=idAsc&start=0' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/idm/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Delete user
+curl 'http://10.0.0.252:8080/flowable-ui/idm-app/rest/admin/users/3' \
+  -X 'DELETE' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/idm/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Get the new business model creation page
+curl 'http://10.0.0.252:8080/flowable-ui/modeler/views/popup/process-create.html?version=1782994148229' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/modeler/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Create model
+curl 'http://10.0.0.252:8080/flowable-ui/modeler-app/rest/models' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/modeler/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --data-raw '{"name":"modelA","key":"123321","description":"test","modelType":0}' \
+  --insecure
+
+View model list
+curl 'http://10.0.0.252:8080/flowable-ui/modeler-app/rest/models?filter=processes&modelType=0&sort=modifiedDesc' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/modeler/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Get delete model page
+curl 'http://10.0.0.252:8080/flowable-ui/modeler/views/popup/model-delete.html' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/modeler/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.0.0.252:8080/flowable-ui/modeler-app/rest/models/effb9ce2-760e-11f1-9f0d-5650cbb11260/parent-relations' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Expires: 0' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/modeler/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure
+
+Delete model
+curl 'http://10.0.0.252:8080/flowable-ui/modeler-app/rest/models/effb9ce2-760e-11f1-9f0d-5650cbb11260?cascade=false' \
+  -X 'DELETE' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1796843400.1760667802; _ga_EXFX9C09LD=GS2.1.s1760667802$o1$g0$t1760667802$j60$l0$h0; KB_RM=8c51290605925be2f5989dafb22fbb066b277b02bfe1ae9de767dfd3110e6cbb%7Cfd80bc7f18da29e275d5a82aea3e46318aef87d580665debee92ce740188; 804627be1acb47989a59132a51c9c8fc_username=fb7f6c5baf26a966751477bbcaf2cab3b9f9b6d5fdd75e10cc54f0f589f9fb9ba%3A2%3A%7Bi%3A0%3Bs%3A41%3A%22804627be1acb47989a59132a51c9c8fc_username%22%3Bi%3A1%3Bs%3A5%3A%22admin%22%3B%7D; seraph.confluence=622593%3Ab9b133f01b16da829efa972d2fa2306a87a70ed0; a96072f1e9fcd5f60a4b901a2cf8dab4=c6b46dc762f2360e7ba7505053c3ea1d; joomla_user_state=logged_in; FLOWABLE_REMEMBER_ME=dmxqRGJwNTdsNjhJWjlGd0FIYVVYZyUzRCUzRDphZDNNNmsxbVlxWnA1N1I3Q3lkVHpnJTNEJTNE' \
+  -H 'Origin: http://10.0.0.252:8080' \
+  -H 'Referer: http://10.0.0.252:8080/flowable-ui/modeler/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  --insecure

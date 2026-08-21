@@ -1,0 +1,12 @@
+services:
+  mvn-builder:
+    image: maven:3.9-eclipse-temurin-8
+    container_name: java_agent_builder
+    volumes:
+      - .:/usr/src/mymaven
+      - maven-repo:/root/.m2
+    working_dir: /usr/src/mymaven
+    command: mvn clean package
+
+volumes:
+  maven-repo:

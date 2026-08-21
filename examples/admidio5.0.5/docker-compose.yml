@@ -1,0 +1,66 @@
+services:
+  admidio-test-db:
+    image: pg-request-logger:13.12
+    container_name: admidio-test-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=admidio
+      - POSTGRES_USER=admidio
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./admidio-test/postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admidio -d admidio"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+
+  admidio:
+    image: admidio/admidio:v5.0.5
+    container_name: admidio-test-app
+    restart: unless-stopped
+    depends_on:
+      - admidio-test-db
+    volumes:
+      - ./admidio-test/files:/opt/app-root/src/adm_my_files
+      - ./admidio-test/themes:/opt/app-root/src/adm_themes
+      - ./admidio-test/plugins:/opt/app-root/src/adm_plugins
+
+      - ./hook/Database.php:/opt/app-root/src/src/Infrastructure/Database.php
+      - ./hook/hook.php:/opt/app-root/src/hook.php
+      - ./hook/hook.ini:/etc/php/8.3/apache2/conf.d/99-hook.ini
+      - ./logs:/tmp/logs
+      - ../../rust_sqlparse_compatible/librust_sql_rewriter.so:/tmp/librust_sql_rewriter.so
+    ports:
+      - 3100:8080
+    environment:
+      - ADMIDIO_DB_TYPE=pgsql
+      - ADMIDIO_DB_HOST=admidio-test-db:5432
+      - ADMIDIO_DB_NAME=admidio
+      - ADMIDIO_DB_USER=admidio
+      - ADMIDIO_DB_PASSWORD=password
+      - ADMIDIO_DB_TABLE_PRAEFIX=adm
+      - ADMIDIO_MAIL_RELAYHOST=192.168.10.10:25
+      - ADMIDIO_LOGIN_FOR_UPDATE=1
+      - ADMIDIO_ORGANISATION=GBV
+      - ADMIDIO_PASSWORD_HASH_ALGORITHM=DEFAULT
+      - TZ=Europe/Vienna
+      - ADMIDIO_ROOT_PATH=http://localhost:3100
+    security_opt:
+      - "seccomp:unconfined"

@@ -1,0 +1,4 @@
+comment = 'Request ID CDC tracing and active snapshot bounds'
+default_version = '1.0'
+module_pathname = '$libdir/request_id_logger'
+relocatable = true

@@ -1,0 +1,51 @@
+services:
+  postgresql:
+    # Use the official image
+    image: pg-request-logger:13.12
+    environment:
+      # --- Official image environment variables ---
+      - POSTGRES_USER=moodle
+      - POSTGRES_PASSWORD=moodle
+      - POSTGRES_DB=moodle
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgresql_data:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+      
+    networks:
+      - moodle-network
+
+  moodle:
+    build: . 
+    ports:
+      - '8081:80'
+    volumes:
+      - ./moodle_data:/var/www/html/moodledata
+      - ./hook/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./hook/config.php:/var/www/html/config.php
+      - ./hook/request_id_hook.php:/var/www/html/request_id_hook.php
+      - ./hook/pgsql_native_moodle_database.php:/var/www/html/lib/dml/pgsql_native_moodle_database.php
+      - ./hook/pgsql_native_moodle_recordset.php:/var/www/html/lib/dml/pgsql_native_moodle_recordset.php
+      - ./hook/RustSqlRewriter.php:/var/www/html/lib/dml/RustSqlRewriter.php
+      - ../../rust_sqlparse_compatible/librust_sql_rewriter.so:/var/www/html/lib/dml/librust_sql_rewriter.so
+    depends_on:
+      - postgresql
+    networks:
+      - moodle-network
+networks:
+  moodle-network:
+    driver: bridge

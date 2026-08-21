@@ -1,0 +1,35 @@
+{
+  "connection": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "airflow",
+    "user": "airflow",
+    "password": "airflow"
+  },
+  "table_info": {
+    "public.alembic_version": "version_num",
+    "public.dag_pickle": "id",
+    "public.import_error": "id",
+    "public.job": "id",
+    "public.slot_pool": "id",
+    "public.chart": "id",
+    "public.known_event_type": "id",
+    "public.known_event": "id",
+    "public.xcom": "id",
+    "public.dag_run": "id",
+    "public.sla_miss": "task_id",
+    "public.connection": "id",
+    "public.variable": "id",
+    "public.task_fail": "id",
+    "public.kube_resource_version": "one_row_id",
+    "public.kube_worker_uuid": "one_row_id",
+    "public.task_reschedule": "id",
+    "public.users": "id",
+    "public.dag": "dag_id",
+    "public.dag_tag": "name",
+    "public.task_instance": "task_id",
+    "public.rendered_task_instance_fields": "dag_id",
+    "public.dag_code": "fileloc_hash",
+    "public.serialized_dag": "dag_id"
+  }
+}

@@ -1,0 +1,32 @@
+# Rebuild request_id_logger (with snapshot bounds functions) into the postgis image.
+# The previously published postgis-request-logger:13.12 was built from an older
+# request_id_logger.c that lacks nomai_snapshot_bounds_xmin/xmax, and also omitted the
+# extension control/sql files. This Dockerfile refreshes the .so from current source
+# and installs the missing control/sql/init so CREATE EXTENSION works.
+#
+# Build (from repo root):
+#   docker build -t postgis-request-logger:13.12 -f pgsql_cdc/Dockerfile_postgis pgsql_cdc
+
+# ---------- Stage 1: Build the .so against postgres 13.12 server headers ----------
+FROM postgres:13.12 AS builder
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    build-essential \
+    postgresql-server-dev-13 \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY request_id_logger.c /tmp/request_id_logger.c
+
+WORKDIR /tmp
+
+RUN gcc -Wall -Werror -fPIC -I$(pg_config --includedir-server) \
+        -I$(pg_config --includedir) \
+        -shared -o request_id_logger.so request_id_logger.c
+
+# ---------- Stage 2: Runtime, on top of the existing postgis base (has postgis + wal2json) ----------
+FROM postgis-request-logger:13.12
+
+COPY --from=builder /tmp/request_id_logger.so /usr/lib/postgresql/13/lib/request_id_logger.so
+COPY --chmod=0644 request_id_logger.control /usr/share/postgresql/13/extension/
+COPY --chmod=0644 request_id_logger--1.0.sql /usr/share/postgresql/13/extension/
+COPY --chmod=0644 init-request-id-logger.sql /docker-entrypoint-initdb.d/10-request-id-logger.sql

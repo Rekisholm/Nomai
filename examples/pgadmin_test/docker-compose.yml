@@ -1,0 +1,48 @@
+services:
+  pgadmin:
+    image: vulhub/pgadmin:7.6
+    volumes:
+      - ./hook/pgAdmin4.py:/usr/local/lib/python3.10/site-packages/pgadmin4/pgAdmin4.py
+      - ./hook/hook.py:/usr/local/lib/python3.10/site-packages/pgadmin4/hook.py
+      - ./hook/hook_lib.py:/usr/local/lib/python3.10/site-packages/pgadmin4/hook_lib.py
+      - ./hook/config_local.py:/usr/local/lib/python3.10/site-packages/pgadmin4/config_local.py
+      - ../../rust_sqlparse_compatible/librust_sql_rewriter.so:/tmp/librust_sql_rewriter.so
+      - ./logs:/tmp/logs
+      - ./pgadmindata:/var/lib/pgadmin/storage
+    environment:
+      - CONFIG_DATABASE_URI=postgresql://postgres:postgres@postgres:5432/cve
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "5050:5050"
+
+  postgres:
+    image: pg-request-logger:13.12
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=cve
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      start_period: 15s
+      interval: 10s
+      timeout: 5s
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pgdata:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"

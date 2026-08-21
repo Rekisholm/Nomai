@@ -1,0 +1,22 @@
+# Stage 1: Build stage with the full compiler toolchain.
+FROM postgres:13.12 AS cdcbuilder
+
+# Install build dependencies.
+# RUN apt-get update && apt-get install -y build-essential postgresql-server-dev-13
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    build-essential \
+    postgresql-server-dev-13 \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy the local wal2json source into the build container.
+COPY wal2json /tmp/wal2json
+
+# Build wal2json.
+RUN cd /tmp/wal2json && make
+
+# ----------------------------------------------------
+# Stage 2: Runtime image containing only PostgreSQL and the plugin.
+FROM postgres:13.12
+
+# Copy the compiled wal2json plugin, usually /tmp/wal2json/wal2json.so.
+COPY --from=cdcbuilder /tmp/wal2json/wal2json.so /usr/lib/postgresql/13/lib/wal2json.so

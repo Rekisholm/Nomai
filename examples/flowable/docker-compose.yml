@@ -1,0 +1,62 @@
+services:
+  # Database service
+  flowable-db:
+    image: pg-request-logger:13.12
+    container_name: flowable-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=flowable
+      - POSTGRES_PASSWORD=flowable
+      - POSTGRES_DB=flowable
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowable"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+
+  # Flowable UI service
+  flowable-ui:
+    build: .
+    container_name: flowable-ui
+    restart: always
+    depends_on:
+      flowable-db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/tmp/logs
+      - ./hook/table_config.json:/tmp/table_config.json
+      - ./hook/java-agent.jar:/tmp/java-agent.jar
+      - ../../rust_sqlparse_java/libjni_sql_rewriter.so:/libjni_sql_rewriter.so
+    environment:
+      # Database connection configuration
+      - JAVA_OPTS=-javaagent:/tmp/java-agent.jar
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://flowable-db:5432/flowable
+      - SPRING_DATASOURCE_USERNAME=flowable
+      - SPRING_DATASOURCE_PASSWORD=flowable
+      # Allow Flowable to create/update database tables automatically
+      - FLOWABLE_COMMON_APP_IDM-REDIRECT-URL=http://localhost:8080/flowable-idm
+      - FLOWABLE_IDM_APP_REDIRECT-URL=http://localhost:8080/flowable-idm
+      - FLOWABLE_MODELER_APP_REDIRECT-URL=http://localhost:8080/flowable-modeler
+      - FLOWABLE_TASK_APP_REDIRECT-URL=http://localhost:8080/flowable-task
+      - FLOWABLE_ADMIN_APP_REDIRECT-URL=http://localhost:8080/flowable-admin

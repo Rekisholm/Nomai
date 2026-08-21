@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: pg-request-logger:13.12
+    environment:
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_DB: superset
+    #volumes:
+    #  - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+
+  web:
+    image: vulhub/superset:2.0.1
+    ports:
+      - "8088:8088"
+    depends_on:
+      - postgres
+    volumes:
+      - ./hook/superset_config.py:/app/pythonpath/superset_config.py # important
+
+      - ./hook/hook.py:/app/pythonpath/hook.py
+      - ./hook/hook_lib.py:/app/hook_lib.py
+      - ./hook/gunicorn_config.py:/app/gunicorn_config.py
+      - ./logs:/tmp/logs
+      - ./tests:/app/tests
+      - ${SQL_REWRITER_SO_PATH:-../../rust_sqlparse_compatible/librust_sql_rewriter.so}:/app/librust_sql_rewriter.so
+    environment:
+      SUPERSET_LOAD_EXAMPLES: "no"
+      SUPERSET_HOOK_VERBOSE: "True" # enable verbose logging for hook.py
+      GUNICORN_CMD_ARGS: "--config /app/gunicorn_config.py" # specify gunicorn config file for hook

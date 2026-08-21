@@ -1,0 +1,8 @@
+services:
+  dev:
+    build: .
+    volumes:
+      - .:/app
+    command: tail -f /dev/null
+    environment:
+      - RUST_BACKTRACE=1

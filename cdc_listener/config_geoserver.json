@@ -1,0 +1,12 @@
+{
+  "connection": {
+    "host": "localhost",
+    "port": 5434,
+    "database": "geoserver",
+    "user": "postgres",
+    "password": "vulhub"
+  },
+  "table_info": {
+    "public.example": "fid"
+  }
+}

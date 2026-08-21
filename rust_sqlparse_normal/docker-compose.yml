@@ -1,0 +1,6 @@
+services:
+  builder:
+    image: rust-legacy-builder
+    volumes:
+      - .:/app
+    command: cargo build --release

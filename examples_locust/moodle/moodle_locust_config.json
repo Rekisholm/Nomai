@@ -1,0 +1,12 @@
+{
+  "base_url": "http://10.0.0.252:8081",
+  "course_shortname": "locust_1784559585",
+  "course_id": 5,
+  "page_activity_id": 26,
+  "forum_activity_id": 79,
+  "forum_discussion_id": 4,
+  "forum_reply_id": 9,
+  "users_csv": "locust_users.csv",
+  "admin_username": "admin",
+  "admin_password": "Aa!123456"
+}

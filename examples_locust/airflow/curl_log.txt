@@ -1,0 +1,129 @@
+curl 'http://10.95.231.197:8080/admin/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnSug.43B0AP0tp708UDyYbYcmckMsQVM' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/dagrun/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnS1Q.C2tiJr5Tsz6AcRCzAd1h5Kmiwsg' \
+  -H 'Referer: http://10.95.231.197:8080/admin/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/dagrun/new/?url=%2Fadmin%2Fdagrun%2F' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnTAQ.YM5Cv0y-Wycmv_1OY_yzx2sFmcU' \
+  -H 'Referer: http://10.95.231.197:8080/admin/dagrun/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/dagrun/new/?url=%2Fadmin%2Fdagrun%2F' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryuLNswwxG6iB1Q6B4' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnS9g.ZjIrfCrYAGAzvPLzfot9veTqRAo' \
+  -H 'Origin: http://10.95.231.197:8080' \
+  -H 'Referer: http://10.95.231.197:8080/admin/dagrun/new/?url=%2Fadmin%2Fdagrun%2F' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --data-raw $'------WebKitFormBoundaryuLNswwxG6iB1Q6B4\r\nContent-Disposition: form-data; name="csrf_token"\r\n\r\nImY3M2ExNWQ2YWQxNWY2OWQ3MDUxOThmZDYzNjQ5NzlhMTczMjBlMGYi.alnS9g.U1xC1io6rbgrKErYQpzrr2kIvr4\r\n------WebKitFormBoundaryuLNswwxG6iB1Q6B4\r\nContent-Disposition: form-data; name="state"\r\n\r\nrunning\r\n------WebKitFormBoundaryuLNswwxG6iB1Q6B4\r\nContent-Disposition: form-data; name="dag_id"\r\n\r\n123\r\n------WebKitFormBoundaryuLNswwxG6iB1Q6B4\r\nContent-Disposition: form-data; name="execution_date"\r\n\r\n2026-07-17 07:00:06\r\n------WebKitFormBoundaryuLNswwxG6iB1Q6B4\r\nContent-Disposition: form-data; name="run_id"\r\n\r\n\r\n------WebKitFormBoundaryuLNswwxG6iB1Q6B4\r\nContent-Disposition: form-data; name="external_trigger"\r\n\r\ny\r\n------WebKitFormBoundaryuLNswwxG6iB1Q6B4--\r\n' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/user/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnTOw.l-CAIIvqLErogYrKDCekNW5X8pE' \
+  -H 'Referer: http://10.95.231.197:8080/admin/configurationview/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/user/new/?url=%2Fadmin%2Fuser%2F' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnTPw.YJTOfrNFW_hoRfFJ8gcTZMNwmkM' \
+  -H 'Referer: http://10.95.231.197:8080/admin/user/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/user/new/?url=%2Fadmin%2Fuser%2F' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryi62oEL595Af83sfg' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnTTQ.d32Zhb7-xQ7nb_fzdqtsSc6eSPg' \
+  -H 'Origin: http://10.95.231.197:8080' \
+  -H 'Referer: http://10.95.231.197:8080/admin/user/new/?url=%2Fadmin%2Fuser%2F' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --data-raw $'------WebKitFormBoundaryi62oEL595Af83sfg\r\nContent-Disposition: form-data; name="csrf_token"\r\n\r\nImY3M2ExNWQ2YWQxNWY2OWQ3MDUxOThmZDYzNjQ5NzlhMTczMjBlMGYi.alnTTQ.zFz4_kEhjPXIKZd2ODHT-N1NyuQ\r\n------WebKitFormBoundaryi62oEL595Af83sfg\r\nContent-Disposition: form-data; name="username"\r\n\r\ntestuser\r\n------WebKitFormBoundaryi62oEL595Af83sfg\r\nContent-Disposition: form-data; name="email"\r\n\r\nuser@1.com\r\n------WebKitFormBoundaryi62oEL595Af83sfg--\r\n' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/user/delete/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnTaA.Ik5XUzXuqQJwTjFzgtAidxIqe_s' \
+  -H 'Origin: http://10.95.231.197:8080' \
+  -H 'Referer: http://10.95.231.197:8080/admin/user/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --data-raw 'id=1&url=%2Fadmin%2Fuser%2F&csrf_token=ImY3M2ExNWQ2YWQxNWY2OWQ3MDUxOThmZDYzNjQ5NzlhMTczMjBlMGYi.alnTaA.HPrrbUFvcfzPycRPhlvWq0Gpxq4' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/connection/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnTnQ.zyQBDOcz82_iBLgQfbX0WHaB5SI' \
+  -H 'Referer: http://10.95.231.197:8080/admin/user/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/connection/new/?url=%2Fadmin%2Fconnection%2F' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryZWx9pgzib16gOKOF' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnUQg.cnIwRY_mt96ne5nQm9xEfGagzro' \
+  -H 'Origin: http://10.95.231.197:8080' \
+  -H 'Referer: http://10.95.231.197:8080/admin/connection/new/?url=%2Fadmin%2Fconnection%2F' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --data-raw $'------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="csrf_token"\r\n\r\nImY3M2ExNWQ2YWQxNWY2OWQ3MDUxOThmZDYzNjQ5NzlhMTczMjBlMGYi.alnUQg._-y3TSyg238vpWJ8PpncY0TrmhY\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="conn_id"\r\n\r\n123\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="conn_type"\r\n\r\n__None\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="host"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="schema"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="login"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="password"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="port"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__jdbc__drv_path"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__jdbc__drv_clsname"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__google_cloud_platform__project"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__google_cloud_platform__key_path"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__google_cloud_platform__keyfile_dict"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__google_cloud_platform__scope"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__google_cloud_platform__num_retries"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__grpc__auth_type"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__grpc__credentials_pem_file"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF\r\nContent-Disposition: form-data; name="extra__grpc__scopes"\r\n\r\n\r\n------WebKitFormBoundaryZWx9pgzib16gOKOF--\r\n' \
+  --insecure
+
+curl 'http://10.95.231.197:8080/admin/connection/delete/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -b 'load-tutorial-flow=true; JSESSIONID=8D252E7B6E16BC3E0AEBD48EE54F4617; confluence.browse.space.cookie=space-templates; 1146121618b44a4e8ae25478fc699a30_username=97dfad81b703329661374837d55d92bb181c26dda117cc7e0a56bbc976fb15a6a%3A2%3A%7Bi%3A0%3Bs%3A41%3A%221146121618b44a4e8ae25478fc699a30_username%22%3Bi%3A1%3Bs%3A1%3A%221%22%3B%7D; Craft-6d214d93-0d41-4c5b-9291-0723c0f7777e:sidebar=expanded; CraftSessionId=ddb2a7d1c573e49b3692b3c946b8800f; CRAFT_CSRF_TOKEN=5bfe5964fc55646b6ee1c096c06229c6e93e97161e32045202834e9a4fa725a2a%3A2%3A%7Bi%3A0%3Bs%3A16%3A%22CRAFT_CSRF_TOKEN%22%3Bi%3A1%3Bs%3A147%3A%22hNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C702d83b96ed8767a85740c1a580e3a81c2d8fec1286c71c69b504f36d8b8b97dhNn21429_DEMNUMYCM1-FrIYa9OObklABb1HR6Z7%7C1%22%3B%7D; KB_SID=tp152kr986t03mr8pgdrlcmjuq; session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZjczYTE1ZDZhZDE1ZjY5ZDcwNTE5OGZkNjM2NDk3OWExNzMyMGUwZiJ9.alnURw.0Zrnca1br47w0gPoICyU6O6CZAQ' \
+  -H 'Origin: http://10.95.231.197:8080' \
+  -H 'Referer: http://10.95.231.197:8080/admin/connection/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+  --data-raw 'id=1&url=%2Fadmin%2Fconnection%2F&csrf_token=ImY3M2ExNWQ2YWQxNWY2OWQ3MDUxOThmZDYzNjQ5NzlhMTczMjBlMGYi.alnURw.tau7JT0V9LSLBaFoUQAcnDA5zSE' \
+  --insecure

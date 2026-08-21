@@ -1,0 +1,32 @@
+{
+  "connection": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "cve",
+    "user": "postgres",
+    "password": "postgres"
+  },
+  "table_info": {
+    "public.message": "message_id",
+    "public.alembic_version": "version_num",
+    "public.version": "name",
+    "public.setting": "user_id",
+    "public.role": "id",
+    "public.servergroup": "id",
+    "public.module_preference": "id",
+    "public.preference_category": "id",
+    "public.preferences": "id",
+    "public.user_preferences": "pid",
+    "public.debugger_function_arguments": "server_id",
+    "public.keys": "name",
+    "public.query_history": "srno",
+    "public.database": "id",
+    "public.macros": "id",
+    "public.user_macros": "mid",
+    "public.user": "id",
+    "public.user_mfa": "user_id",
+    "public.process": "pid",
+    "public.server": "id",
+    "public.sharedserver": "id"
+  }
+}

@@ -1,0 +1,52 @@
+services:
+  app:
+    build: .
+    container_name: kanboard
+    restart: always
+    ports:
+     - "8080:80"
+    volumes:
+     - ./kanboard_data/data:/var/www/app/data
+     - ./kanboard_data/plugins:/var/www/app/plugins
+     - ./kanboard_data/certs:/etc/nginx/ssl
+
+     - ./hook/hook.php:/var/www/app/hook.php
+     - ./hook/DatabaseProvider.php:/var/www/app/app/ServiceProvider/DatabaseProvider.php
+     - ./hook/hook.ini:/etc/php83/conf.d/00_hook.ini
+     - ../../rust_sqlparse_compatible/librust_sql_rewriter.so:/tmp/librust_sql_rewriter.so
+     - ./logs:/tmp/logs
+    environment:
+      DATABASE_URL: postgres://kanboard:kanboard-secret@db/kanboard
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: pg-request-logger:13.12
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: kanboard
+      POSTGRES_PASSWORD: kanboard-secret
+      POSTGRES_DB: kanboard
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "kanboard"]
+      start_period: 15s
+      interval: 10s
+      timeout: 5s
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "shared_preload_libraries=request_id_logger,wal2json"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"

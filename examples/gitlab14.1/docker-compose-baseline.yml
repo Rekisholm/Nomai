@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:13.12
+    container_name: gitlab-pg
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: gitlab
+      POSTGRES_PASSWORD: Gitlab@123456
+      POSTGRES_DB: gitlabhq_production
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+      - "-c"
+      - "max_wal_senders=10"
+      - "-c"
+      - "max_replication_slots=10"
+      - "-c"
+      - "wal_keep_size=256MB"
+      - "-c"
+      - "max_connections=100"
+
+  gitlab:
+    image: gitlab/gitlab-ce:14.1.0-ce.0
+    container_name: gitlab-ce14
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8080:80"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['db_adapter']='postgresql'
+        gitlab_rails['db_host']='postgres'
+        gitlab_rails['db_port']=5432
+        gitlab_rails['db_database']='gitlabhq_production'
+        gitlab_rails['db_username']='gitlab'
+        gitlab_rails['db_password']='Gitlab@123456'
+        postgresql['enable']=false
+    volumes:
+      - ./gitlabdata/config:/etc/gitlab
+      - ./gitlabdata/logs:/var/log/gitlab
+      - ./gitlabdata/data:/var/opt/gitlab
